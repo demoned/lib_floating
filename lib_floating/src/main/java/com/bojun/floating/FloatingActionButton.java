@@ -775,8 +775,8 @@ public class FloatingActionButton extends ImageButton {
             out.writeInt(this.mShowProgressBackground ? 1 : 0);
         }
 
-        public static final Parcelable.Creator<ProgressSavedState> CREATOR =
-                new Parcelable.Creator<ProgressSavedState>() {
+        public static final Creator<ProgressSavedState> CREATOR =
+                new Creator<ProgressSavedState>() {
                     public ProgressSavedState createFromParcel(Parcel in) {
                         return new ProgressSavedState(in);
                     }

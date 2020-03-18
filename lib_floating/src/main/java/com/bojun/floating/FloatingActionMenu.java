@@ -733,7 +733,7 @@ public class FloatingActionMenu extends ViewGroup {
     }
 
     /**
-     * Sets the {@link android.view.animation.Interpolator} for <b>FloatingActionButton's</b> icon animation.
+     * Sets the {@link Interpolator} for <b>FloatingActionButton's</b> icon animation.
      *
      * @param interpolator the Interpolator to be used in animation
      */
