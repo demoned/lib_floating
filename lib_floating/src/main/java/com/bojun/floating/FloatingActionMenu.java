@@ -23,9 +23,6 @@ import android.view.animation.AnticipateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
-
-import com.github.clans.fab.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
