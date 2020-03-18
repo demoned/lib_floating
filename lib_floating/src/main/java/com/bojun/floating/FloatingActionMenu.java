@@ -121,7 +121,7 @@ public class FloatingActionMenu extends ViewGroup {
         init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    public void init(Context context, AttributeSet attrs) {
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.FloatingActionMenu, 0, 0);
         mButtonSpacing = attr.getDimensionPixelSize(R.styleable.FloatingActionMenu_menu_buttonSpacing, mButtonSpacing);
         mLabelsMargin = attr.getDimensionPixelSize(R.styleable.FloatingActionMenu_menu_labels_margin, mLabelsMargin);
@@ -195,7 +195,7 @@ public class FloatingActionMenu extends ViewGroup {
         attr.recycle();
     }
 
-    private void initMenuButtonAnimations(TypedArray attr) {
+    public void initMenuButtonAnimations(TypedArray attr) {
         int showResId = attr.getResourceId(R.styleable.FloatingActionMenu_menu_fab_show_animation, R.anim.fab_scale_up);
         setMenuButtonShowAnimation(AnimationUtils.loadAnimation(getContext(), showResId));
         mImageToggleShowAnimation = AnimationUtils.loadAnimation(getContext(), showResId);
@@ -205,7 +205,7 @@ public class FloatingActionMenu extends ViewGroup {
         mImageToggleHideAnimation = AnimationUtils.loadAnimation(getContext(), hideResId);
     }
 
-    private void initBackgroundDimAnimation() {
+    public void initBackgroundDimAnimation() {
         final int maxAlpha = Color.alpha(mBackgroundColor);
         final int red = Color.red(mBackgroundColor);
         final int green = Color.green(mBackgroundColor);
@@ -232,18 +232,18 @@ public class FloatingActionMenu extends ViewGroup {
         });
     }
 
-    private boolean isBackgroundEnabled() {
+    public boolean isBackgroundEnabled() {
         return mBackgroundColor != Color.TRANSPARENT;
     }
 
-    private void initPadding(int padding) {
+    public void initPadding(int padding) {
         mLabelsPaddingTop = padding;
         mLabelsPaddingRight = padding;
         mLabelsPaddingBottom = padding;
         mLabelsPaddingLeft = padding;
     }
 
-    private void createMenuButton() {
+    public void createMenuButton() {
         mMenuButton = new FloatingActionButton(getContext());
 
         mMenuButton.mShowShadow = mMenuShowShadow;
@@ -267,7 +267,7 @@ public class FloatingActionMenu extends ViewGroup {
         createDefaultIconAnimation();
     }
 
-    private void createDefaultIconAnimation() {
+    public void createDefaultIconAnimation() {
         float collapseAngle;
         float expandAngle;
         if (mOpenDirection == OPEN_UP) {
@@ -436,7 +436,7 @@ public class FloatingActionMenu extends ViewGroup {
         }
     }
 
-    private int adjustForOvershoot(int dimension) {
+    public int adjustForOvershoot(int dimension) {
         return (int) (dimension * 0.03 + dimension);
     }
 
@@ -449,7 +449,7 @@ public class FloatingActionMenu extends ViewGroup {
         createLabels();
     }
 
-    private void createLabels() {
+    public void createLabels() {
         for (int i = 0; i < mButtonsCount; i++) {
 
             if (getChildAt(i) == mImageToggle) continue;
@@ -471,7 +471,7 @@ public class FloatingActionMenu extends ViewGroup {
         }
     }
 
-    private void addLabel(FloatingActionButton fab) {
+    public void addLabel(FloatingActionButton fab) {
         String text = fab.getLabelText();
 
         if (TextUtils.isEmpty(text)) return;
@@ -528,7 +528,7 @@ public class FloatingActionMenu extends ViewGroup {
         fab.setTag(R.id.fab_label, label);
     }
 
-    private void setLabelEllipsize(Label label) {
+    public void setLabelEllipsize(Label label) {
         switch (mLabelsEllipsize) {
             case 1:
                 label.setEllipsize(TextUtils.TruncateAt.START);
@@ -566,7 +566,7 @@ public class FloatingActionMenu extends ViewGroup {
         return p instanceof MarginLayoutParams;
     }
 
-    private void hideMenuButtonWithImage(boolean animate) {
+    public void hideMenuButtonWithImage(boolean animate) {
         if (!isMenuButtonHidden()) {
             mMenuButton.hide(animate);
             if (animate) {
@@ -577,7 +577,7 @@ public class FloatingActionMenu extends ViewGroup {
         }
     }
 
-    private void showMenuButtonWithImage(boolean animate) {
+    public void showMenuButtonWithImage(boolean animate) {
         if (isMenuButtonHidden()) {
             mMenuButton.show(animate);
             if (animate) {

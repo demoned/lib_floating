@@ -116,7 +116,7 @@ public class FloatingActionButton extends ImageButton {
         init(context, attrs, defStyleAttr);
     }
 
-    private void init(Context context, AttributeSet attrs, int defStyleAttr) {
+    public void init(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.FloatingActionButton, defStyleAttr, 0);
         mColorNormal = attr.getColor(R.styleable.FloatingActionButton_fab_colorNormal, 0xFFDA4336);
         mColorPressed = attr.getColor(R.styleable.FloatingActionButton_fab_colorPressed, 0xFFE75043);
@@ -166,22 +166,22 @@ public class FloatingActionButton extends ImageButton {
         setClickable(true);
     }
 
-    private void initShowAnimation(TypedArray attr) {
+    public void initShowAnimation(TypedArray attr) {
         int resourceId = attr.getResourceId(R.styleable.FloatingActionButton_fab_showAnimation, R.anim.fab_scale_up);
         mShowAnimation = AnimationUtils.loadAnimation(getContext(), resourceId);
     }
 
-    private void initHideAnimation(TypedArray attr) {
+    public void initHideAnimation(TypedArray attr) {
         int resourceId = attr.getResourceId(R.styleable.FloatingActionButton_fab_hideAnimation, R.anim.fab_scale_down);
         mHideAnimation = AnimationUtils.loadAnimation(getContext(), resourceId);
     }
 
-    private int getCircleSize() {
+    public int getCircleSize() {
         return getResources().getDimensionPixelSize(mFabSize == SIZE_NORMAL
                 ? R.dimen.fab_size_normal : R.dimen.fab_size_mini);
     }
 
-    private int calculateMeasuredWidth() {
+    public int calculateMeasuredWidth() {
         int width = getCircleSize() + calculateShadowWidth();
         if (mProgressBarEnabled) {
             width += mProgressWidth * 2;
@@ -189,7 +189,7 @@ public class FloatingActionButton extends ImageButton {
         return width;
     }
 
-    private int calculateMeasuredHeight() {
+    public int calculateMeasuredHeight() {
         int height = getCircleSize() + calculateShadowHeight();
         if (mProgressBarEnabled) {
             height += mProgressWidth * 2;
@@ -197,27 +197,27 @@ public class FloatingActionButton extends ImageButton {
         return height;
     }
 
-    int calculateShadowWidth() {
+    public int calculateShadowWidth() {
         return hasShadow() ? getShadowX() * 2 : 0;
     }
 
-    int calculateShadowHeight() {
+    public int calculateShadowHeight() {
         return hasShadow() ? getShadowY() * 2 : 0;
     }
 
-    private int getShadowX() {
+    public int getShadowX() {
         return mShadowRadius + Math.abs(mShadowXOffset);
     }
 
-    private int getShadowY() {
+    public int getShadowY() {
         return mShadowRadius + Math.abs(mShadowYOffset);
     }
 
-    private float calculateCenterX() {
+    public float calculateCenterX() {
         return (float) (getMeasuredWidth() / 2);
     }
 
-    private float calculateCenterY() {
+    public float calculateCenterY() {
         return (float) (getMeasuredHeight() / 2);
     }
 
@@ -284,7 +284,7 @@ public class FloatingActionButton extends ImageButton {
         }
     }
 
-    private void updateProgressLength(long deltaTimeInMillis) {
+    public void updateProgressLength(long deltaTimeInMillis) {
         if (mPausedTimeWithoutGrowing >= PAUSE_GROWING_TIME) {
             mTimeStartGrowing += deltaTimeInMillis;
 
@@ -342,7 +342,7 @@ public class FloatingActionButton extends ImageButton {
         super.setLayoutParams(params);
     }
 
-    void updateBackground() {
+    public void updateBackground() {
         LayerDrawable layerDrawable;
         if (hasShadow()) {
             layerDrawable = new LayerDrawable(new Drawable[]{
@@ -397,7 +397,7 @@ public class FloatingActionButton extends ImageButton {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private Drawable createFillDrawable() {
+    public Drawable createFillDrawable() {
         StateListDrawable drawable = new StateListDrawable();
         drawable.addState(new int[]{-android.R.attr.state_enabled}, createCircleDrawable(mColorDisabled));
         drawable.addState(new int[]{android.R.attr.state_pressed}, createCircleDrawable(mColorPressed));
@@ -421,7 +421,7 @@ public class FloatingActionButton extends ImageButton {
         return drawable;
     }
 
-    private Drawable createCircleDrawable(int color) {
+    public Drawable createCircleDrawable(int color) {
         CircleDrawable shapeDrawable = new CircleDrawable(new OvalShape());
         shapeDrawable.getPaint().setColor(color);
         return shapeDrawable;
@@ -429,7 +429,7 @@ public class FloatingActionButton extends ImageButton {
 
     @SuppressWarnings("deprecation")
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void setBackgroundCompat(Drawable drawable) {
+    public void setBackgroundCompat(Drawable drawable) {
         if (Util.hasJellyBean()) {
             setBackground(drawable);
         } else {
@@ -437,7 +437,7 @@ public class FloatingActionButton extends ImageButton {
         }
     }
 
-    private void saveButtonOriginalPosition() {
+    public void saveButtonOriginalPosition() {
         if (!mButtonPositionSaved) {
             if (mOriginalX == -1) {
                 mOriginalX = getX();
@@ -451,7 +451,7 @@ public class FloatingActionButton extends ImageButton {
         }
     }
 
-    private void updateButtonPosition() {
+    public void updateButtonPosition() {
         float x;
         float y;
         if (mProgressBarEnabled) {
@@ -465,7 +465,7 @@ public class FloatingActionButton extends ImageButton {
         setY(y);
     }
 
-    private void setupProgressBarPaints() {
+    public void setupProgressBarPaints() {
         mBackgroundPaint.setColor(mProgressBackgroundColor);
         mBackgroundPaint.setStyle(Paint.Style.STROKE);
         mBackgroundPaint.setStrokeWidth(mProgressWidth);
@@ -475,7 +475,7 @@ public class FloatingActionButton extends ImageButton {
         mProgressPaint.setStrokeWidth(mProgressWidth);
     }
 
-    private void setupProgressBounds() {
+    public void setupProgressBounds() {
         int circleInsetHorizontal = hasShadow() ? getShadowX() : 0;
         int circleInsetVertical = hasShadow() ? getShadowY() : 0;
         mProgressCircleBounds = new RectF(
@@ -486,40 +486,40 @@ public class FloatingActionButton extends ImageButton {
         );
     }
 
-    Animation getShowAnimation() {
+    public Animation getShowAnimation() {
         return mShowAnimation;
     }
 
-    Animation getHideAnimation() {
+    public Animation getHideAnimation() {
         return mHideAnimation;
     }
 
-    void playShowAnimation() {
+    public void playShowAnimation() {
         mHideAnimation.cancel();
         startAnimation(mShowAnimation);
     }
 
-    void playHideAnimation() {
+    public void playHideAnimation() {
         mShowAnimation.cancel();
         startAnimation(mHideAnimation);
     }
 
-    OnClickListener getOnClickListener() {
+    public OnClickListener getOnClickListener() {
         return mClickListener;
     }
 
-    Label getLabelView() {
+    public Label getLabelView() {
         return (Label) getTag(R.id.fab_label);
     }
 
-    void setColors(int colorNormal, int colorPressed, int colorRipple) {
+    public void setColors(int colorNormal, int colorPressed, int colorRipple) {
         mColorNormal = colorNormal;
         mColorPressed = colorPressed;
         mColorRipple = colorRipple;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    void onActionDown() {
+    public void onActionDown() {
         if (mBackgroundDrawable instanceof StateListDrawable) {
             StateListDrawable drawable = (StateListDrawable) mBackgroundDrawable;
             drawable.setState(new int[]{android.R.attr.state_enabled, android.R.attr.state_pressed});
@@ -532,7 +532,7 @@ public class FloatingActionButton extends ImageButton {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    void onActionUp() {
+    public void onActionUp() {
         if (mBackgroundDrawable instanceof StateListDrawable) {
             StateListDrawable drawable = (StateListDrawable) mBackgroundDrawable;
             drawable.setState(new int[]{android.R.attr.state_enabled});
@@ -640,15 +640,15 @@ public class FloatingActionButton extends ImageButton {
         this.mLastTimeAnimated = SystemClock.uptimeMillis();
     }
 
-    private class CircleDrawable extends ShapeDrawable {
+    public class CircleDrawable extends ShapeDrawable {
 
-        private int circleInsetHorizontal;
-        private int circleInsetVertical;
+        public int circleInsetHorizontal;
+        public int circleInsetVertical;
 
-        private CircleDrawable() {
+        public CircleDrawable() {
         }
 
-        private CircleDrawable(Shape s) {
+        public CircleDrawable(Shape s) {
             super(s);
             circleInsetHorizontal = hasShadow() ? mShadowRadius + Math.abs(mShadowXOffset) : 0;
             circleInsetVertical = hasShadow() ? mShadowRadius + Math.abs(mShadowYOffset) : 0;
@@ -667,17 +667,17 @@ public class FloatingActionButton extends ImageButton {
         }
     }
 
-    private class Shadow extends Drawable {
+    public class Shadow extends Drawable {
 
         private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         private Paint mErase = new Paint(Paint.ANTI_ALIAS_FLAG);
         private float mRadius;
 
-        private Shadow() {
+        public Shadow() {
             this.init();
         }
 
-        private void init() {
+        public void init() {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
             mPaint.setStyle(Paint.Style.FILL);
             mPaint.setColor(mColorNormal);
@@ -717,7 +717,7 @@ public class FloatingActionButton extends ImageButton {
         }
     }
 
-    static class ProgressSavedState extends BaseSavedState {
+    public static class ProgressSavedState extends BaseSavedState {
 
         float mCurrentProgress;
         float mTargetProgress;
@@ -734,11 +734,11 @@ public class FloatingActionButton extends ImageButton {
         boolean mAnimateProgress;
         boolean mShowProgressBackground;
 
-        ProgressSavedState(Parcelable superState) {
+        public ProgressSavedState(Parcelable superState) {
             super(superState);
         }
 
-        private ProgressSavedState(Parcel in) {
+        public ProgressSavedState(Parcel in) {
             super(in);
             this.mCurrentProgress = in.readFloat();
             this.mTargetProgress = in.readFloat();

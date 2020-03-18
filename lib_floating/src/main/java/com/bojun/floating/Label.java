@@ -66,29 +66,29 @@ public class Label extends TextView {
         setMeasuredDimension(calculateMeasuredWidth(), calculateMeasuredHeight());
     }
 
-    private int calculateMeasuredWidth() {
+    public int calculateMeasuredWidth() {
         if (mRawWidth == 0) {
             mRawWidth = getMeasuredWidth();
         }
         return getMeasuredWidth() + calculateShadowWidth();
     }
 
-    private int calculateMeasuredHeight() {
+    public int calculateMeasuredHeight() {
         if (mRawHeight == 0) {
             mRawHeight = getMeasuredHeight();
         }
         return getMeasuredHeight() + calculateShadowHeight();
     }
 
-    int calculateShadowWidth() {
+    public  int calculateShadowWidth() {
         return mShowShadow ? (mShadowRadius + Math.abs(mShadowXOffset)) : 0;
     }
 
-    int calculateShadowHeight() {
+    public  int calculateShadowHeight() {
         return mShowShadow ? (mShadowRadius + Math.abs(mShadowYOffset)) : 0;
     }
 
-    void updateBackground() {
+    public  void updateBackground() {
         LayerDrawable layerDrawable;
         if (mShowShadow) {
             layerDrawable = new LayerDrawable(new Drawable[]{
@@ -118,7 +118,7 @@ public class Label extends TextView {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private Drawable createFillDrawable() {
+    public Drawable createFillDrawable() {
         StateListDrawable drawable = new StateListDrawable();
         drawable.addState(new int[]{android.R.attr.state_pressed}, createRectDrawable(mColorPressed));
         drawable.addState(new int[]{}, createRectDrawable(mColorNormal));
@@ -141,7 +141,7 @@ public class Label extends TextView {
         return drawable;
     }
 
-    private Drawable createRectDrawable(int color) {
+    public Drawable createRectDrawable(int color) {
         RoundRectShape shape = new RoundRectShape(
                 new float[]{
                         mCornerRadius,
@@ -160,7 +160,7 @@ public class Label extends TextView {
         return shapeDrawable;
     }
 
-    private void setShadow(FloatingActionButton fab) {
+    public void setShadow(FloatingActionButton fab) {
         mShadowColor = fab.getShadowColor();
         mShadowRadius = fab.getShadowRadius();
         mShadowXOffset = fab.getShadowXOffset();
@@ -170,7 +170,7 @@ public class Label extends TextView {
 
     @SuppressWarnings("deprecation")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void setBackgroundCompat(Drawable drawable) {
+    public void setBackgroundCompat(Drawable drawable) {
         if (Util.hasJellyBean()) {
             setBackground(drawable);
         } else {
@@ -178,14 +178,14 @@ public class Label extends TextView {
         }
     }
 
-    private void playShowAnimation() {
+    public void playShowAnimation() {
         if (mShowAnimation != null) {
             mHideAnimation.cancel();
             startAnimation(mShowAnimation);
         }
     }
 
-    private void playHideAnimation() {
+    public void playHideAnimation() {
         if (mHideAnimation != null) {
             mShowAnimation.cancel();
             startAnimation(mHideAnimation);
@@ -193,7 +193,7 @@ public class Label extends TextView {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    void onActionDown() {
+    public  void onActionDown() {
         if (mUsingStyle) {
             mBackgroundDrawable = getBackground();
         }
@@ -211,7 +211,7 @@ public class Label extends TextView {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    void onActionUp() {
+    public   void onActionUp() {
         if (mUsingStyle) {
             mBackgroundDrawable = getBackground();
         }
@@ -228,56 +228,56 @@ public class Label extends TextView {
 //        setPressed(false);
     }
 
-    void setFab(FloatingActionButton fab) {
+    public  void setFab(FloatingActionButton fab) {
         mFab = fab;
         setShadow(fab);
     }
 
-    void setShowShadow(boolean show) {
+    public void setShowShadow(boolean show) {
         mShowShadow = show;
     }
 
-    void setCornerRadius(int cornerRadius) {
+    public void setCornerRadius(int cornerRadius) {
         mCornerRadius = cornerRadius;
     }
 
-    void setColors(int colorNormal, int colorPressed, int colorRipple) {
+    public  void setColors(int colorNormal, int colorPressed, int colorRipple) {
         mColorNormal = colorNormal;
         mColorPressed = colorPressed;
         mColorRipple = colorRipple;
     }
 
-    void show(boolean animate) {
+    public  void show(boolean animate) {
         if (animate) {
             playShowAnimation();
         }
         setVisibility(VISIBLE);
     }
 
-    void hide(boolean animate) {
+    public  void hide(boolean animate) {
         if (animate) {
             playHideAnimation();
         }
         setVisibility(INVISIBLE);
     }
 
-    void setShowAnimation(Animation showAnimation) {
+    public   void setShowAnimation(Animation showAnimation) {
         mShowAnimation = showAnimation;
     }
 
-    void setHideAnimation(Animation hideAnimation) {
+    public  void setHideAnimation(Animation hideAnimation) {
         mHideAnimation = hideAnimation;
     }
 
-    void setUsingStyle(boolean usingStyle) {
+    public  void setUsingStyle(boolean usingStyle) {
         mUsingStyle = usingStyle;
     }
 
-    void setHandleVisibilityChanges(boolean handle) {
+    public  void setHandleVisibilityChanges(boolean handle) {
         mHandleVisibilityChanges = handle;
     }
 
-    boolean isHandleVisibilityChanges() {
+    public boolean isHandleVisibilityChanges() {
         return mHandleVisibilityChanges;
     }
 
@@ -325,16 +325,16 @@ public class Label extends TextView {
         }
     });
 
-    private class Shadow extends Drawable {
+    public class Shadow extends Drawable {
 
         private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         private Paint mErase = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        private Shadow() {
+        public Shadow() {
             this.init();
         }
 
-        private void init() {
+        public void init() {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
             mPaint.setStyle(Paint.Style.FILL);
             mPaint.setColor(mColorNormal);
